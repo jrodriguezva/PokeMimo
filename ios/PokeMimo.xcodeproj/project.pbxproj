@@ -8,28 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* PokeMimoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* PokeMimoTests.m */; };
-		0DE58D7C7382414EBBB841C7 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B044F220C4F24ED493C145ED /* Feather.ttf */; };
+		0DFF50D226E0BD8400A36BEC /* ImagePickerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DFF50D126E0BD8400A36BEC /* ImagePickerManager.m */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		378AC475CD3D46CDB497B3CF /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 65D28CC1AE064CA28AA0F606 /* FontAwesome.ttf */; };
-		3AC03A57E32D45F091BC9A70 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2EA604240FD4768B0E5FE99 /* FontAwesome5_Regular.ttf */; };
-		4B7C92D5B3E64BC7B1686F24 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 774412831ADB4DEFB274D31C /* MaterialCommunityIcons.ttf */; };
-		4C95762144D54797BB689FD7 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F69D2763B11F43A9B3BD310C /* MaterialIcons.ttf */; };
-		5075E6F6DC0A4511AF839A3E /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 33E6A1B7EF044EF0BDAB08A9 /* Fontisto.ttf */; };
 		6172F2D35A4C3AA820D92908 /* libPods-PokeMimo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6423831EA8574132BED9D8CC /* libPods-PokeMimo.a */; };
-		62B2770CAD48418B89D06E3C /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28ABD211CBD44171A57F22F4 /* SimpleLineIcons.ttf */; };
-		726FB953F7C9451BA1C5BD6E /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17FFDC6CCD3942DDAA1BB5F8 /* FontAwesome5_Solid.ttf */; };
 		7EF68E3733C33B6898317E18 /* libPods-PokeMimo-PokeMimoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFE59519B596E51CEFDCCC0 /* libPods-PokeMimo-PokeMimoTests.a */; };
-		801E80B8DF3D4D88AC9B1EFE /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79D0879F6B47426BA40F095A /* EvilIcons.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		829638D5FEC74A4DAD4E04FC /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 72BC5A127D02445EA66695B7 /* Zocial.ttf */; };
-		873213E3957E4F258BB9B292 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 154AFA6A5A0A4AE7B348144A /* AntDesign.ttf */; };
-		9EE6AF9C3DDE459E8928819F /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BCAD07AB8CCC48389A175A09 /* FontAwesome5_Brands.ttf */; };
-		B4552E6C6E924694A87EEC1F /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E7C3FE88566B4B95A7C34167 /* Entypo.ttf */; };
-		D0CDEC5A1D8A4E7A9B85292A /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D2E5C2A744944C9A1B9839D /* Ionicons.ttf */; };
-		F1D9990220EF44CEA4935C88 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4A176C6075AC438FB570DD8A /* Octicons.ttf */; };
-		FCF5FC29FA6A446E96180C63 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4BF5CE4A26114F74B4A90E35 /* Foundation.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +47,9 @@
 		0DE6538726DFFECD00B9D603 /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Fontisto.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		0DE6538826DFFECE00B9D603 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Octicons.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		0DE6538926DFFECE00B9D603 /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = AntDesign.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
+		0DFF50D026E0BD8400A36BEC /* ImagePickerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ImagePickerManager.h; path = PokeMimo/ImagePickerManager.h; sourceTree = "<group>"; };
+		0DFF50D126E0BD8400A36BEC /* ImagePickerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ImagePickerManager.m; path = PokeMimo/ImagePickerManager.m; sourceTree = "<group>"; };
+		0DFF50D626E1493F00A36BEC /* PokeMimo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = PokeMimo.entitlements; path = PokeMimo/PokeMimo.entitlements; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* PokeMimo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokeMimo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = PokeMimo/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = PokeMimo/AppDelegate.m; sourceTree = "<group>"; };
@@ -180,6 +168,9 @@
 		13B07FAE1A68108700A75B9A /* PokeMimo */ = {
 			isa = PBXGroup;
 			children = (
+				0DFF50D626E1493F00A36BEC /* PokeMimo.entitlements */,
+				0DFF50D026E0BD8400A36BEC /* ImagePickerManager.h */,
+				0DFF50D126E0BD8400A36BEC /* ImagePickerManager.m */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -340,22 +331,6 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				873213E3957E4F258BB9B292 /* AntDesign.ttf in Resources */,
-				B4552E6C6E924694A87EEC1F /* Entypo.ttf in Resources */,
-				801E80B8DF3D4D88AC9B1EFE /* EvilIcons.ttf in Resources */,
-				0DE58D7C7382414EBBB841C7 /* Feather.ttf in Resources */,
-				378AC475CD3D46CDB497B3CF /* FontAwesome.ttf in Resources */,
-				9EE6AF9C3DDE459E8928819F /* FontAwesome5_Brands.ttf in Resources */,
-				3AC03A57E32D45F091BC9A70 /* FontAwesome5_Regular.ttf in Resources */,
-				726FB953F7C9451BA1C5BD6E /* FontAwesome5_Solid.ttf in Resources */,
-				5075E6F6DC0A4511AF839A3E /* Fontisto.ttf in Resources */,
-				FCF5FC29FA6A446E96180C63 /* Foundation.ttf in Resources */,
-				D0CDEC5A1D8A4E7A9B85292A /* Ionicons.ttf in Resources */,
-				4B7C92D5B3E64BC7B1686F24 /* MaterialCommunityIcons.ttf in Resources */,
-				4C95762144D54797BB689FD7 /* MaterialIcons.ttf in Resources */,
-				F1D9990220EF44CEA4935C88 /* Octicons.ttf in Resources */,
-				62B2770CAD48418B89D06E3C /* SimpleLineIcons.ttf in Resources */,
-				829638D5FEC74A4DAD4E04FC /* Zocial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,6 +499,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				0DFF50D226E0BD8400A36BEC /* ImagePickerManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,7 +571,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = PokeMimo/PokeMimo.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SJ22AA4TZ6;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = PokeMimo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -621,7 +599,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = PokeMimo/PokeMimo.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SJ22AA4TZ6;
 				INFOPLIST_FILE = PokeMimo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
