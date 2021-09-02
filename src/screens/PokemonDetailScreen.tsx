@@ -3,7 +3,7 @@ import {Animated, StyleSheet, useWindowDimensions, View} from 'react-native';
 import {TabBar, TabView} from 'react-native-tab-view';
 import {FadeInImage} from '../components/FadeInImage';
 import {RootStackParams} from '../navigation/PokedexNavigator';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {StackScreenProps} from '@react-navigation/stack';
 import {useAnimation} from '../hooks/useAnimation';
 import {usePokemonDetail} from '../hooks/usePokemonDetail';
 import InfoPokemonTab from '../components/tabs/InfoPokemonTab';
@@ -11,7 +11,7 @@ import {ThemeContext} from '../context/ThemeContext';
 import StatsPokemonTab from '../components/tabs/StatsPokemonTab';
 
 interface Props
-  extends NativeStackScreenProps<RootStackParams, 'PokemonDetailScreen'> {}
+  extends StackScreenProps<RootStackParams, 'PokemonDetailScreen'> {}
 
 const PokemonDetailScreen = ({route}: Props) => {
   const layout = useWindowDimensions();
