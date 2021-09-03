@@ -201,6 +201,8 @@ dependencies {
         exclude group:'com.facebook.flipper'
     }
 
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
+
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";
         debugImplementation files(hermesPath + "hermes-debug.aar")
