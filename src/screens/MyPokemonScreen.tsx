@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { ActivityIndicator, Alert, FlatList, Image, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, FlatList, Image, StyleSheet, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { FAB, Text, useTheme } from 'react-native-paper';
+import { Button, Dialog, FAB, Paragraph, Portal, Text, useTheme } from 'react-native-paper';
 import { globalStyle } from '../theme/styles';
 import PokemonItem from '../components/PokemonItem';
 import { usePokemonDatabase } from '../hooks/usePokemonDatabase';
@@ -11,7 +11,9 @@ const MyPokemonScreen = () => {
   const navigation = useNavigation();
   const { top } = useSafeAreaInsets();
   const { colors } = useTheme();
-
+  const [visible, setVisible] = React.useState(false);
+  const [idRemove, setIdRemove] = React.useState<number>();
+  const hideDialog = () => setVisible(false);
   const { loading, pokemonList, deletePokemon, loadPokemon } = usePokemonDatabase();
 
   useEffect(() => {
@@ -20,6 +22,26 @@ const MyPokemonScreen = () => {
 
   return (
     <View style={{ flex: 1 }}>
+      <Portal>
+        <Dialog visible={visible} onDismiss={hideDialog}>
+          <Dialog.Title>Warning!!!</Dialog.Title>
+          <Dialog.Content>
+            <Paragraph>Do you want delete this pokemon?</Paragraph>
+          </Dialog.Content>
+          <Dialog.Actions>
+            <Button color={colors.text} onPress={hideDialog}>
+              Cancel
+            </Button>
+            <Button
+              onPress={() => {
+                idRemove && deletePokemon(idRemove);
+                hideDialog();
+              }}>
+              Delete
+            </Button>
+          </Dialog.Actions>
+        </Dialog>
+      </Portal>
       <Image source={require('../assets/pokeball.png')} style={globalStyle.pokeballBG} />
       <FlatList
         style={{ marginHorizontal: 10 }}
@@ -34,7 +56,15 @@ const MyPokemonScreen = () => {
             You can create new pokemon by pressing float action button.
           </Text>
         }
-        renderItem={({ item }) => <PokemonItem pokemon={item} event={() => removeAlert(item.idDatabase)} />}
+        renderItem={({ item }) => (
+          <PokemonItem
+            pokemon={item}
+            event={() => {
+              setVisible(true);
+              setIdRemove(item.idDatabase);
+            }}
+          />
+        )}
         ListHeaderComponent={
           <Text
             style={{
@@ -64,17 +94,6 @@ const MyPokemonScreen = () => {
       </View>
     </View>
   );
-
-  function removeAlert(id: number) {
-    Alert.alert('Warning!!!', 'Do you want delete this pokemon', [
-      {
-        text: 'Delete',
-        style: 'cancel',
-        onPress: () => deletePokemon(id),
-      },
-      { text: 'Cancel' },
-    ]);
-  }
 };
 export default MyPokemonScreen;
 
