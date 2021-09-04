@@ -3,10 +3,8 @@ import { Appbar, RadioButton, Title } from 'react-native-paper';
 import { View } from 'react-native';
 import { ThemeType } from '../theme/Theme';
 import { PreferencesContext } from '../context/PreferenceContext';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const SettingScreen = () => {
-  const { top } = useSafeAreaInsets();
   const { toggleTheme, userSelection } = React.useContext(PreferencesContext);
   const [value, setValue] = React.useState<ThemeType>(userSelection);
   return (

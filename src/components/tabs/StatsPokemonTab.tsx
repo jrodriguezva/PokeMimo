@@ -10,7 +10,7 @@ interface Props {
   pokemonSpecies: PokemonSpecies;
 }
 
-const InfoPokemonTab = ({ pokemon }: Props) => {
+const StatPokemonTab = ({ pokemon }: Props) => {
   const { colors } = useTheme();
 
   return (
@@ -65,4 +65,4 @@ const InfoPokemonTab = ({ pokemon }: Props) => {
   );
 };
 
-export default InfoPokemonTab;
+export default StatPokemonTab;
