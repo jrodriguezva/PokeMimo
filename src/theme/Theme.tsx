@@ -9,7 +9,8 @@ export const CustomDarkTheme = {
   colors: {
     ...PaperDarkTheme.colors,
     ...NavigationDarkTheme.colors,
-    primary: '#a8270b',
+    primary: '#E3350D',
+    accent: '#FFCC00',
   },
 };
 
@@ -20,5 +21,6 @@ export const CustomDefaultTheme = {
     ...PaperDefaultTheme.colors,
     ...NavigationDefaultTheme.colors,
     primary: '#E3350D',
+    accent: '#FFCC00',
   },
 };

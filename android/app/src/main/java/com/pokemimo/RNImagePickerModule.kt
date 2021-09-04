@@ -30,12 +30,12 @@ class RNImagePickerModule : ReactContextBaseJavaModule {
                 if (resultCode == Activity.RESULT_OK) {
                     intent.data?.getPath()?.let {
                         promise?.resolve(encoder(it))
-                    } ?: promise?.reject("error_data","Data not exist")
+                    } ?: promise?.reject("error_data", "Data not exist")
 
                 } else if (resultCode == ImagePicker.RESULT_ERROR) {
-                    promise?.reject("error_image",ImagePicker.getError(intent))
+                    promise?.reject("error_image", ImagePicker.getError(intent))
                 } else {
-                    promise?.reject("error_cancel","Task Cancelled")
+                    promise?.reject("error_cancel", "The user has canceled the action")
                 }
             }
         }
@@ -54,8 +54,8 @@ class RNImagePickerModule : ReactContextBaseJavaModule {
         this.promise = promise
         getCurrentActivity()?.let { currentActivity ->
             ImagePicker.with(currentActivity)
-                .crop(1f,1f)
-                .galleryMimeTypes(  //Exclude gif images
+                .crop(1f, 1f)
+                .galleryMimeTypes(
                     mimeTypes = arrayOf(
                         "image/png",
                         "image/jpg",

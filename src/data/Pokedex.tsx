@@ -12,7 +12,7 @@ export interface PokemonResult {
 
 export interface Pokemon {
   id: string;
-  idDatabase: number;
+  idDatabase?: number;
   name: string;
   image?: string;
   color?: string;

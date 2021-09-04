@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, useWindowDimensions, View } from 'react-native';
+import { FlatList, View } from 'react-native';
 import { PokemonDetail } from '../../data/PokemonDetail';
 import * as Progress from 'react-native-progress';
 import { PokemonSpecies } from '../../data/PokemonSpecies';

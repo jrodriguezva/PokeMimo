@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -14,6 +14,7 @@ const PREFERENCES_KEY = 'APP_PREFERENCES';
 const App = () => {
   const [theme, setTheme] = React.useState(CustomDefaultTheme);
 
+  const isMounted = useRef(true);
   const [userSelection, setUserSelection] = React.useState<ThemeType>('system');
 
   const changeThemeByAppearance = useCallback(() => {
@@ -35,7 +36,7 @@ const App = () => {
         case 'system':
           changeThemeByAppearance();
           AppState.addEventListener('change', status => {
-            if (status === 'active') {
+            if (status === 'active' && userSelection === 'system') {
               changeThemeByAppearance();
             }
           });
@@ -46,25 +47,26 @@ const App = () => {
   );
 
   React.useEffect(() => {
-    let unmounted = false;
     const restorePrefs = async () => {
-      try {
-        const prefString = await AsyncStorage.getItem(PREFERENCES_KEY);
-        if (!unmounted) {
+      await AsyncStorage.getItem(PREFERENCES_KEY).then(prefString => {
+        if (!isMounted.current) {
+          return;
+        }
+        try {
           const preferences: ThemeType = prefString != null ? JSON.parse(prefString) : 'system';
           console.log('preferences: ' + preferences);
           changeTheme(preferences);
+        } catch (e) {
+          console.error(e);
+          // ignore error
         }
-      } catch (e) {
-        console.error(e);
-        // ignore error
-      }
+      });
     };
     restorePrefs();
     return () => {
-      unmounted = true;
+      isMounted.current = true;
     };
-  }, []);
+  }, [changeTheme]);
 
   React.useEffect(() => {
     const savePrefs = async () => {
