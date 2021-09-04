@@ -1,14 +1,14 @@
 import React from 'react';
-import {RadioButton, Title} from 'react-native-paper';
-import {View} from 'react-native';
-import {ThemeType} from '../theme/Theme';
-import {PreferencesContext} from '../context/PreferenceContext';
+import { RadioButton, Title } from 'react-native-paper';
+import { View } from 'react-native';
+import { ThemeType } from '../theme/Theme';
+import { PreferencesContext } from '../context/PreferenceContext';
 
 const SettingScreen = () => {
-  const {toggleTheme, userSelection} = React.useContext(PreferencesContext);
+  const { toggleTheme, userSelection } = React.useContext(PreferencesContext);
   const [value, setValue] = React.useState<ThemeType>(userSelection);
   return (
-    <View style={{margin: 20}}>
+    <View style={{ margin: 20 }}>
       <Title>Select theme</Title>
       <RadioButton.Group
         onValueChange={val => {

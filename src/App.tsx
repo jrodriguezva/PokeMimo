@@ -1,13 +1,13 @@
-import React, {useCallback} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import React, { useCallback } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {Navigator} from './navigation/PokedexNavigator';
-import {Provider as PaperProvider} from 'react-native-paper';
-import {Appearance, AppState, StatusBar} from 'react-native';
-import {CustomDarkTheme, CustomDefaultTheme, ThemeType} from './theme/Theme';
-import {PreferencesContext} from './context/PreferenceContext';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Navigator } from './navigation/PokedexNavigator';
+import { Provider as PaperProvider } from 'react-native-paper';
+import { Appearance, AppState, StatusBar } from 'react-native';
+import { CustomDarkTheme, CustomDefaultTheme, ThemeType } from './theme/Theme';
+import { PreferencesContext } from './context/PreferenceContext';
 
 const PREFERENCES_KEY = 'APP_PREFERENCES';
 
@@ -18,11 +18,7 @@ const App = () => {
 
   const changeThemeByAppearance = useCallback(() => {
     console.log('changeThemeByAppearance');
-    setTheme(
-      Appearance.getColorScheme() === 'light'
-        ? CustomDefaultTheme
-        : CustomDarkTheme,
-    );
+    setTheme(Appearance.getColorScheme() === 'light' ? CustomDefaultTheme : CustomDarkTheme);
   }, []);
 
   const changeTheme = useCallback(
@@ -55,8 +51,7 @@ const App = () => {
       try {
         const prefString = await AsyncStorage.getItem(PREFERENCES_KEY);
         if (!unmounted) {
-          const preferences: ThemeType =
-            prefString != null ? JSON.parse(prefString) : 'system';
+          const preferences: ThemeType = prefString != null ? JSON.parse(prefString) : 'system';
           console.log('preferences: ' + preferences);
           changeTheme(preferences);
         }
@@ -74,10 +69,7 @@ const App = () => {
   React.useEffect(() => {
     const savePrefs = async () => {
       try {
-        await AsyncStorage.setItem(
-          PREFERENCES_KEY,
-          JSON.stringify(userSelection),
-        );
+        await AsyncStorage.setItem(PREFERENCES_KEY, JSON.stringify(userSelection));
       } catch (e) {
         // ignore error
       }
@@ -101,9 +93,7 @@ const App = () => {
           <NavigationContainer theme={theme}>
             <StatusBar
               backgroundColor={theme.colors.primary}
-              barStyle={
-                theme === CustomDarkTheme ? 'dark-content' : 'light-content'
-              }
+              barStyle={theme === CustomDarkTheme ? 'dark-content' : 'light-content'}
             />
             <Navigator />
           </NavigationContainer>

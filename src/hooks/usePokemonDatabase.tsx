@@ -1,6 +1,6 @@
-import {useState} from 'react';
-import {Pokemon} from '../data/Pokedex';
-import database, {PokemonModel} from '../data/local/database';
+import { useState } from 'react';
+import { Pokemon } from '../data/Pokedex';
+import database, { PokemonModel } from '../data/local/database';
 
 export const usePokemonDatabase = () => {
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
@@ -72,5 +72,5 @@ export const usePokemonDatabase = () => {
     });
   };
 
-  return {loading, pokemonList, addPokemon, deletePokemon, loadPokemon};
+  return { loading, pokemonList, addPokemon, deletePokemon, loadPokemon };
 };

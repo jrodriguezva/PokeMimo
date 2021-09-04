@@ -1,36 +1,34 @@
 import React from 'react';
-import {FlatList, StyleSheet, useWindowDimensions} from 'react-native';
+import { FlatList, StyleSheet, useWindowDimensions } from 'react-native';
 
-import {PokemonDetail} from '../../data/PokemonDetail';
+import { PokemonDetail } from '../../data/PokemonDetail';
 import MaterialChipTypes from '../Chips';
-import {PokemonSpecies} from '../../data/PokemonSpecies';
+import { PokemonSpecies } from '../../data/PokemonSpecies';
 import InfoPokemonFooter from './InfoPokemonFooter';
 import InfoPokemonHeader from './InfoPokemonHeader';
-import {useTheme} from 'react-native-paper';
+import { useTheme } from 'react-native-paper';
 
 interface Props {
   pokemon: PokemonDetail;
   pokemonSpecies: PokemonSpecies;
 }
 
-const InfoPokemonTab = ({pokemon, pokemonSpecies}: Props) => {
-  const {width} = useWindowDimensions();
-  const {colors} = useTheme();
+const InfoPokemonTab = ({ pokemon, pokemonSpecies }: Props) => {
+  const { width } = useWindowDimensions();
+  const { colors } = useTheme();
   if (!pokemon.id && !pokemonSpecies.id) {
     return <></>;
   }
   return (
     <FlatList
       ListHeaderComponent={<InfoPokemonHeader pokemon={pokemon} />}
-      ListFooterComponent={
-        <InfoPokemonFooter pokemonSpecies={pokemonSpecies} pokemon={pokemon} />
-      }
+      ListFooterComponent={<InfoPokemonFooter pokemonSpecies={pokemonSpecies} pokemon={pokemon} />}
       nestedScrollEnabled
-      contentContainerStyle={{alignItems: 'center'}}
+      contentContainerStyle={{ alignItems: 'center' }}
       data={pokemon.types}
       numColumns={2}
-      style={{backgroundColor: colors.background}}
-      renderItem={({item}) => (
+      style={{ backgroundColor: colors.background }}
+      renderItem={({ item }) => (
         <MaterialChipTypes
           type={item}
           style={{

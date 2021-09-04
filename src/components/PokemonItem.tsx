@@ -1,31 +1,25 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {Pokemon} from '../data/Pokedex';
-import {
-  Image,
-  StyleSheet,
-  TouchableOpacity,
-  useWindowDimensions,
-  View,
-} from 'react-native';
-import {FadeInImage} from './FadeInImage';
-import {Text} from 'react-native-paper';
+import React, { useEffect, useRef, useState } from 'react';
+import { Pokemon } from '../data/Pokedex';
+import { Image, StyleSheet, TouchableOpacity, useWindowDimensions, View } from 'react-native';
+import { FadeInImage } from './FadeInImage';
+import { Text } from 'react-native-paper';
 import ImageColors from 'react-native-image-colors';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 interface Props {
   pokemon: Pokemon;
   event?: () => void;
 }
 
-const PokemonItem = ({pokemon, event}: Props) => {
-  const {width} = useWindowDimensions();
+const PokemonItem = ({ pokemon, event }: Props) => {
+  const { width } = useWindowDimensions();
   const [bgColor, setBgColor] = useState('grey');
   const isMounted = useRef(true);
   const navigation = useNavigation();
 
   useEffect(() => {
     if (pokemon.image != null) {
-      ImageColors.getColors(pokemon.image, {fallback: 'grey'}).then(colors => {
+      ImageColors.getColors(pokemon.image, { fallback: 'grey' }).then(colors => {
         if (!isMounted.current) {
           return;
         }
@@ -75,18 +69,9 @@ const PokemonItem = ({pokemon, event}: Props) => {
         </View>
 
         <View style={styles.pokeballContainer}>
-          <Image
-            source={require('../assets/pokeball.png')}
-            style={styles.pokeball}
-          />
+          <Image source={require('../assets/pokeball.png')} style={styles.pokeball} />
         </View>
-        {pokemon.image && (
-          <FadeInImage
-            uri={pokemon.image}
-            style={styles.pokemonImage}
-            showLoading={true}
-          />
-        )}
+        {pokemon.image && <FadeInImage uri={pokemon.image} style={styles.pokemonImage} showLoading={true} />}
       </View>
     </TouchableOpacity>
   );

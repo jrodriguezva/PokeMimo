@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import {Animated, ImageStyle, StyleProp, View} from 'react-native';
-import {useAnimation} from '../hooks/useAnimation';
+import React, { useState } from 'react';
+import { Animated, ImageStyle, StyleProp, View } from 'react-native';
+import { useAnimation } from '../hooks/useAnimation';
 
 interface Props {
   uri: string;
@@ -8,8 +8,8 @@ interface Props {
   style?: StyleProp<ImageStyle>;
 }
 
-export const FadeInImage = ({uri, style = {}, showLoading = true}: Props) => {
-  const {opacity, fadeIn, animatedStyle, rotateAnimation} = useAnimation();
+export const FadeInImage = ({ uri, style = {}, showLoading = true }: Props) => {
+  const { opacity, fadeIn, animatedStyle, rotateAnimation } = useAnimation();
 
   React.useEffect(() => {
     rotateAnimation();

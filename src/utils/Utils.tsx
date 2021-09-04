@@ -42,4 +42,5 @@ export function getTypeColor(type: string): string {
 export function capitalize(word: string): string {
   return word[0].toUpperCase() + word.substring(1).toLowerCase();
 }
+
 export const isValidNumber = (v: unknown) => !Number.isNaN(v);

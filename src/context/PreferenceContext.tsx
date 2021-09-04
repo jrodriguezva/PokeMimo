@@ -1,5 +1,5 @@
 import React from 'react';
-import {ThemeType} from '../theme/Theme';
+import { ThemeType } from '../theme/Theme';
 
 interface PreferenceContextProp {
   toggleTheme: (_: ThemeType) => void;

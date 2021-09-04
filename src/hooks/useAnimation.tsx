@@ -1,5 +1,5 @@
-import {useRef} from 'react';
-import {Animated, Easing} from 'react-native';
+import { useRef } from 'react';
+import { Animated, Easing } from 'react-native';
 
 export const useAnimation = () => {
   const opacity = useRef(new Animated.Value(0)).current;
@@ -22,10 +22,7 @@ export const useAnimation = () => {
     }).start();
   };
 
-  const startMovingPosition = (
-    initPosition: number,
-    duration: number = 300,
-  ) => {
+  const startMovingPosition = (initPosition: number, duration: number = 300) => {
     position.setValue(initPosition);
 
     Animated.timing(position, {

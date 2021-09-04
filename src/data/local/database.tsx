@@ -17,6 +17,6 @@ const PokemonSchema = {
   primaryKey: '_id',
 };
 
-let realm = Realm.open({schema: [PokemonSchema]});
+let realm = Realm.open({ schema: [PokemonSchema] });
 
 export default realm;

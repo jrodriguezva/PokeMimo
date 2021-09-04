@@ -1,18 +1,17 @@
 import React from 'react';
-import {FlatList, useWindowDimensions, View} from 'react-native';
-import {PokemonDetail} from '../../data/PokemonDetail';
+import { FlatList, useWindowDimensions, View } from 'react-native';
+import { PokemonDetail } from '../../data/PokemonDetail';
 import * as Progress from 'react-native-progress';
-import {PokemonSpecies} from '../../data/PokemonSpecies';
-import {Text, useTheme} from 'react-native-paper';
+import { PokemonSpecies } from '../../data/PokemonSpecies';
+import { Text, useTheme } from 'react-native-paper';
 
 interface Props {
   pokemon: PokemonDetail;
   pokemonSpecies: PokemonSpecies;
 }
 
-const InfoPokemonTab = ({pokemon, pokemonSpecies}: Props) => {
-  const {colors} = useTheme();
-  const {width} = useWindowDimensions();
+const InfoPokemonTab = ({ pokemon }: Props) => {
+  const { colors } = useTheme();
 
   return (
     <View
@@ -21,7 +20,7 @@ const InfoPokemonTab = ({pokemon, pokemonSpecies}: Props) => {
         backgroundColor: colors.background,
         flexDirection: 'column',
       }}>
-      <View style={{marginTop: 24}}>
+      <View style={{ marginTop: 24 }}>
         <FlatList
           ListHeaderComponent={
             <View
@@ -32,13 +31,11 @@ const InfoPokemonTab = ({pokemon, pokemonSpecies}: Props) => {
                 marginBottom: 10,
               }}>
               <Text>Base experience</Text>
-              <Text style={{marginStart: 8, fontWeight: 'bold'}}>
-                {pokemon.base_experience}
-              </Text>
+              <Text style={{ marginStart: 8, fontWeight: 'bold' }}>{pokemon.base_experience}</Text>
             </View>
           }
           data={pokemon.stats}
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
             <View
               style={{
                 flex: 1,
@@ -53,11 +50,11 @@ const InfoPokemonTab = ({pokemon, pokemonSpecies}: Props) => {
                   flexDirection: 'row',
                   justifyContent: 'flex-end',
                 }}>
-                <Text style={{fontWeight: 'bold'}}>{item.base_stat}</Text>
+                <Text style={{ fontWeight: 'bold' }}>{item.base_stat}</Text>
                 <Progress.Bar
                   animated={true}
                   progress={item.base_stat / 300}
-                  style={{alignSelf: 'center', marginStart: 10}}
+                  style={{ alignSelf: 'center', marginStart: 10 }}
                 />
               </View>
             </View>

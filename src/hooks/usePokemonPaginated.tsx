@@ -1,7 +1,7 @@
-import {useEffect, useRef, useState} from 'react';
-import {Pokedex, Pokemon, PokemonResult} from '../data/Pokedex';
-import {capitalize} from '../utils/Utils';
-import {cancelToken, pokemonApi} from '../data/api/pokemonApi';
+import { useEffect, useRef, useState } from 'react';
+import { Pokedex, Pokemon, PokemonResult } from '../data/Pokedex';
+import { capitalize } from '../utils/Utils';
+import { cancelToken, pokemonApi } from '../data/api/pokemonApi';
 
 export const usePokemonPaginated = () => {
   const nextPageUrl = useRef('https://pokeapi.co/api/v2/pokemon?limit=40');
@@ -25,7 +25,7 @@ export const usePokemonPaginated = () => {
   };
 
   const mapPokemonList = (pokeList: PokemonResult[]) => {
-    const pokemons: Pokemon[] = pokeList.map(({name, url}) => {
+    const pokemons: Pokemon[] = pokeList.map(({ name, url }) => {
       const urlPart = url.split('/');
       const nameCapitalize = capitalize(name);
       const id = urlPart[urlPart.length - 2];
@@ -44,5 +44,5 @@ export const usePokemonPaginated = () => {
   useEffect(() => {
     loadPokemon();
   }, []);
-  return {loading, pokemonList, loadPokemon};
+  return { loading, pokemonList, loadPokemon };
 };

@@ -1,17 +1,13 @@
-import {useEffect, useState} from 'react';
-import {cancelToken, pokemonApi} from '../data/api/pokemonApi';
-import {PokemonDetail} from '../data/PokemonDetail';
-import {PokemonSpecies} from '../data/PokemonSpecies';
+import { useEffect, useState } from 'react';
+import { cancelToken, pokemonApi } from '../data/api/pokemonApi';
+import { PokemonDetail } from '../data/PokemonDetail';
+import { PokemonSpecies } from '../data/PokemonSpecies';
 
 export const usePokemonDetail = (id: string) => {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-  const [pokemonDetail, setPokemonDetail] = useState<PokemonDetail>(
-    {} as PokemonDetail,
-  );
+  const [pokemonDetail, setPokemonDetail] = useState<PokemonDetail>({} as PokemonDetail);
 
-  const [pokemonSpecies, setPokemonSpecies] = useState<PokemonSpecies>(
-    {} as PokemonSpecies,
-  );
+  const [pokemonSpecies, setPokemonSpecies] = useState<PokemonSpecies>({} as PokemonSpecies);
   const [loading, isLoading] = useState<boolean>(false);
 
   const loadPokemonDetail = async () => {
@@ -23,12 +19,9 @@ export const usePokemonDetail = (id: string) => {
     const resp = await pokemonApi.get<PokemonDetail>(url, {
       cancelToken: sourceDetail.token,
     });
-    const respSpecies = await pokemonApi.get<PokemonSpecies>(
-      resp.data.species.url,
-      {
-        cancelToken: sourceSpecies.token,
-      },
-    );
+    const respSpecies = await pokemonApi.get<PokemonSpecies>(resp.data.species.url, {
+      cancelToken: sourceSpecies.token,
+    });
 
     setPokemonSpecies(respSpecies.data);
     setPokemonDetail(resp.data);
@@ -46,5 +39,5 @@ export const usePokemonDetail = (id: string) => {
   useEffect(() => {
     loadPokemonDetail();
   }, []);
-  return {loading, pokemonDetail, pokemonSpecies};
+  return { loading, pokemonDetail, pokemonSpecies };
 };

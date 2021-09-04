@@ -1,32 +1,29 @@
-import React, {useState} from 'react';
-import {Alert, Image, NativeModules, StyleSheet, View} from 'react-native';
-import {Button, TextInput} from 'react-native-paper';
-import {useNavigation} from '@react-navigation/native';
-import {isValidNumber} from '../utils/Utils';
-import {usePokemonDatabase} from '../hooks/usePokemonDatabase';
+import React, { useState } from 'react';
+import { Alert, Image, NativeModules, StyleSheet, View } from 'react-native';
+import { Button, TextInput } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
+import { isValidNumber } from '../utils/Utils';
+import { usePokemonDatabase } from '../hooks/usePokemonDatabase';
 
 const CreatePokemonScreen = () => {
   const [name, setName] = useState('');
-  const {addPokemon} = usePokemonDatabase();
+  const { addPokemon } = usePokemonDatabase();
   const navigation = useNavigation();
   const [image, setImage] = useState<string>('');
   const [number, setNumber] = useState('');
 
   return (
-    <View style={{flex: 1, flexDirection: 'column', margin: 24}}>
-      <View style={{alignItems: 'center'}}>
+    <View style={{ flex: 1, flexDirection: 'column', margin: 24 }}>
+      <View style={{ alignItems: 'center' }}>
         {image ? (
           <Image
             source={{
               uri: image,
             }}
-            style={{width: 200, height: 200}}
+            style={{ width: 200, height: 200 }}
           />
         ) : (
-          <Image
-            source={require('../assets/placeholder_image.png')}
-            style={{width: 200, height: 200}}
-          />
+          <Image source={require('../assets/placeholder_image.png')} style={{ width: 200, height: 200 }} />
         )}
         <Button
           style={{
@@ -86,9 +83,8 @@ const CreatePokemonScreen = () => {
 
 export default CreatePokemonScreen;
 
-const createButtonAlert = (error: string) =>
-  Alert.alert('An error has occurred!!', error, [{text: 'OK'}]);
+const createButtonAlert = (error: string) => Alert.alert('An error has occurred!!', error, [{ text: 'OK' }]);
 
 const styles = StyleSheet.create({
-  marginTop: {marginTop: 10},
+  marginTop: { marginTop: 10 },
 });
