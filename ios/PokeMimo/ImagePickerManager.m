@@ -12,7 +12,8 @@
 
 
 @interface ImagePickerManager ()
-@property (nonatomic,strong) RCTResponseSenderBlock callback;
+@property (nonatomic,strong) RCTPromiseRejectBlock reject;
+@property (nonatomic,strong) RCTPromiseResolveBlock resolve;
 @end
 
 @interface ImagePickerManager (UIImagePickerControllerDelegate) <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
@@ -22,14 +23,15 @@
 @implementation ImagePickerManager
 RCT_EXPORT_MODULE(ImagePicker);
 
-RCT_EXPORT_METHOD(getImage:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(getImage:(RCTPromiseResolveBlock) resolve reject:(RCTPromiseRejectBlock)reject)
 {
-  self.callback = callback;
+  self.resolve = resolve;
+  self.reject = reject;
   
   UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Pokemon Image" message:@"Get a image for your pokemon" preferredStyle:UIAlertControllerStyleActionSheet];
   
   UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {
-    callback(@[@{@"error":@"User cancel"}]);
+    reject(@"error_cancel",@"User has canceled the action",nil);
   }];
   if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]){
     UIAlertAction * takePhoto = [UIAlertAction actionWithTitle:@"Take photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
@@ -94,7 +96,7 @@ RCT_EXPORT_METHOD(getImage:(RCTResponseSenderBlock)callback)
     
     NSString *base64 = [self encodeToBase64String:editedImage];
     
-    self.callback(@[@{@"image":base64}]);
+    self.resolve(base64);
   }];
 }
 
@@ -107,6 +109,7 @@ RCT_EXPORT_METHOD(getImage:(RCTResponseSenderBlock)callback)
 {
   UIViewController *root = RCTPresentedViewController();
   [root dismissViewControllerAnimated:YES completion:nil];
+  self.reject(@"error_cancel",@"User has canceled the action",nil);
 }
 
 
@@ -122,7 +125,7 @@ RCT_EXPORT_METHOD(getImage:(RCTResponseSenderBlock)callback)
   }];
   UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel
                                                        handler:^(UIAlertAction * action) {
-    self.callback(@[@{@"error":@"camera_permision"}]);
+    self.reject(@"error_permision",@"User hasn't accepted the camera permission",nil);
   }];
   
   [alert addAction:cancelAction];

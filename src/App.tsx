@@ -93,7 +93,7 @@ const App = () => {
           <NavigationContainer theme={theme}>
             <StatusBar
               backgroundColor={theme.colors.primary}
-              barStyle={theme === CustomDarkTheme ? 'dark-content' : 'light-content'}
+              barStyle={theme === CustomDarkTheme ? 'light-content' : 'dark-content'}
             />
             <Navigator />
           </NavigationContainer>
