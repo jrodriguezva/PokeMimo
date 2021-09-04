@@ -42,6 +42,7 @@ export const Navigator = () => {
       <Stack.Screen
         name="CreatePokemonScreen"
         options={{
+          title: 'Create Pokemon',
           cardStyleInterpolator: CardStyleInterpolators.forBottomSheetAndroid,
         }}
         component={CreatePokemonScreen}

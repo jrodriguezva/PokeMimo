@@ -1,106 +1,122 @@
-import React, {useContext, useState} from 'react';
-import {Image, NativeModules, StyleSheet, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {
+  ActivityIndicator,
+  Alert,
+  FlatList,
+  Image,
+  StyleSheet,
+  View,
+} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
-import {ThemeContext} from '../context/ThemeContext';
-import {Button, FAB, TextInput} from 'react-native-paper';
+import {FAB, Text, useTheme} from 'react-native-paper';
+import {globalStyle} from '../theme/styles';
+import PokemonItem from '../components/PokemonItem';
+import {usePokemonDatabase} from '../hooks/usePokemonDatabase';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const MyPokemonScreen = () => {
-    const navigation = useNavigation();
-    const {theme} = useContext(ThemeContext);
-    const tabBarHeight = useBottomTabBarHeight();
-    const [name, setName] = useState('');
-    const [response, setResponse] = useState<any>(null);
-    const [number, setNumber] = useState('');
+  const navigation = useNavigation();
+  const {top} = useSafeAreaInsets();
+  const {colors} = useTheme();
 
-    return (
-        <View style={{flex: 1, flexDirection: 'column', margin: 24}}>
-            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                {response && response.image ? (
-                    <Image
-                        source={{
-                            uri: `data:image/png;base64,${response.image}`,
-                        }}
-                        style={{width: 200, height: 200}}
-                    />) : (<Image
-                    source={{
-                        uri: 'https://www.madrid.es/UnidadesDescentralizadas/UDCMedios/noticias/2021/09Septiembre/01Miercoles/Notasprensa/Almeida%20inaugura%20bus%20Pza.El%C3%ADptica-Islazul/DESTACADA.jpeg',
-                    }}
-                    style={{width: 200, height: 200}}
-                />)
+  const {loading, pokemonList, deletePokemon, loadPokemon} =
+    usePokemonDatabase();
 
-                }
-                <View style={{flexDirection: 'column', justifyContent: 'space-around'}}>
-                    <Button
-                        icon="camera"
-                        mode="outlined"
-                        onPress={() => console.log('Pressed')}>
-                        Camera
-                    </Button>
-                    <Button
-                        icon="image"
-                        mode="outlined"
-                        onPress={() => console.log('Pressed')}>
-                        Gallery
-                    </Button>
-                </View>
-            </View>
-            <TextInput
-                mode="outlined"
-                label="Number"
-                keyboardType={'number-pad'}
-                style={styles.marginTop}
-                value={number}
-                onChangeText={text => setNumber(text)}
-            />
-            <TextInput
-                mode="outlined"
-                label="Name"
-                value={name}
-                autoCapitalize={'sentences'}
-                style={styles.marginTop}
-                onChangeText={text => setName(text)}
-            />
+  useEffect(() => {
+    loadPokemon();
+  }, []);
 
-            <View style={styles.reminderView}>
-                <FAB
-                    small
-                    icon="plus"
-                    onPress={() => NativeModules.ImagePicker.getImage(setResponse)}
-                    theme={{
-                        colors: {
-                            accent: theme.colors.primary,
-                        },
-                    }}
-                    style={{...styles.fabStyle, marginBottom: tabBarHeight}}
-                />
-            </View>
-        </View>
-    );
+  return (
+    <View style={{flex: 1}}>
+      <Image
+        source={require('../assets/pokeball.png')}
+        style={globalStyle.pokeballBG}
+      />
+      <FlatList
+        style={{marginHorizontal: 10}}
+        data={pokemonList}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={pokemon => pokemon.id}
+        columnWrapperStyle={{justifyContent: 'space-between'}}
+        numColumns={2}
+        ListEmptyComponent={
+          <Text style={{alignSelf: 'center', marginHorizontal: 20}}>
+            No data available yet. {'\n'}
+            You can create new pokemon by pressing float action button.
+          </Text>
+        }
+        renderItem={({item}) => (
+          <PokemonItem
+            pokemon={item}
+            event={() => removeAlert(item.idDatabase)}
+          />
+        )}
+        ListHeaderComponent={
+          <Text
+            style={{
+              ...globalStyle.title,
+              marginStart: 20,
+              top: top + 20,
+              marginBottom: top + 20,
+              paddingBottom: 10,
+            }}>
+            Pokedex
+          </Text>
+        }
+        ListFooterComponent={
+          loading ? (
+            <ActivityIndicator style={{height: 100}} size={20} color={'red'} />
+          ) : (
+            <></>
+          )
+        }
+      />
+      <View style={styles.reminderView}>
+        <FAB
+          small
+          icon="plus"
+          onPress={() => navigation.navigate('CreatePokemonScreen')}
+          theme={{
+            colors: {
+              accent: colors.primary,
+            },
+          }}
+          style={{...styles.fabStyle}}
+        />
+      </View>
+    </View>
+  );
+
+  function removeAlert(id: number) {
+    Alert.alert('Warning!!!', 'Do you want delete this pokemon', [
+      {
+        text: 'Delete',
+        style: 'cancel',
+        onPress: () => deletePokemon(id),
+      },
+      {text: 'Cancel'},
+    ]);
+  }
 };
-
 export default MyPokemonScreen;
 
-// import { colors, fonts, metrics } from 'styles';
-
 const styles = StyleSheet.create({
-    reminderView: {
-        flex: 1,
-        right: 0,
-        margin: 10,
-        bottom: 0,
-        position: 'absolute',
+  reminderView: {
+    flex: 1,
+    right: 0,
+    margin: 10,
+    bottom: 0,
+    position: 'absolute',
+  },
+  fabStyle: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
     },
-    fabStyle: {
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-        shadowOpacity: 0.27,
-        shadowRadius: 4.65,
+    shadowOpacity: 0.27,
+    shadowRadius: 4.65,
 
-        elevation: 6,
-    },
-    marginTop: {marginTop: 10},
+    elevation: 6,
+  },
 });
