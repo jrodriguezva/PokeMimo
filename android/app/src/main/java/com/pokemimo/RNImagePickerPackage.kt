@@ -5,7 +5,7 @@ import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.uimanager.ViewManager
 
-class RNToastPackage : ReactPackage {
+class RNImagePickerPackage : ReactPackage {
 
     override fun createViewManagers(reactContext: ReactApplicationContext):
             MutableList<ViewManager<*, *>> {
@@ -14,6 +14,6 @@ class RNToastPackage : ReactPackage {
 
     override fun createNativeModules(reactContext: ReactApplicationContext):
             MutableList<NativeModule> {
-        return mutableListOf(RNToastModule(reactContext))
+        return mutableListOf(RNImagePickerModule(reactContext))
     }
 }
