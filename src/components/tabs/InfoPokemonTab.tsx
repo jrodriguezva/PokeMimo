@@ -6,6 +6,7 @@ import MaterialChipTypes from '../Chips';
 import {PokemonSpecies} from '../../data/PokemonSpecies';
 import InfoPokemonFooter from './InfoPokemonFooter';
 import InfoPokemonHeader from './InfoPokemonHeader';
+import {useTheme} from 'react-native-paper';
 
 interface Props {
   pokemon: PokemonDetail;
@@ -14,6 +15,7 @@ interface Props {
 
 const InfoPokemonTab = ({pokemon, pokemonSpecies}: Props) => {
   const {width} = useWindowDimensions();
+  const {colors} = useTheme();
   if (!pokemon.id && !pokemonSpecies.id) {
     return <></>;
   }
@@ -27,7 +29,7 @@ const InfoPokemonTab = ({pokemon, pokemonSpecies}: Props) => {
       contentContainerStyle={{alignItems: 'center'}}
       data={pokemon.types}
       numColumns={2}
-      style={{backgroundColor: 'white'}}
+      style={{backgroundColor: colors.background}}
       renderItem={({item}) => (
         <MaterialChipTypes
           type={item}

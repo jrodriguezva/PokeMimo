@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from 'react';
-import {pokemonApi} from '../api/pokemonApi';
 import {Pokedex, Pokemon, PokemonResult} from '../data/Pokedex';
 import {capitalize} from '../utils/Utils';
+import {cancelToken, pokemonApi} from '../data/api/pokemonApi';
 
 export const usePokemonPaginated = () => {
   const nextPageUrl = useRef('https://pokeapi.co/api/v2/pokemon?limit=40');
@@ -10,10 +10,18 @@ export const usePokemonPaginated = () => {
 
   const loadPokemon = async () => {
     isLoading(true);
-    const resp = await pokemonApi.get<Pokedex>(nextPageUrl.current);
+    const source = cancelToken.source();
+    const resp = await pokemonApi.get<Pokedex>(nextPageUrl.current, {
+      cancelToken: source.token,
+    });
     nextPageUrl.current = resp.data.next;
 
     mapPokemonList(resp.data.results);
+    return () => {
+      if (source) {
+        source.cancel();
+      }
+    };
   };
 
   const mapPokemonList = (pokeList: PokemonResult[]) => {

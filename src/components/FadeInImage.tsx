@@ -45,7 +45,9 @@ export const FadeInImage = ({uri, style = {}, showLoading = true}: Props) => {
       )}
 
       <Animated.Image
-        source={{uri}}
+        source={{
+          uri: uri,
+        }}
         onError={onError}
         onLoad={finishLoading}
         style={{

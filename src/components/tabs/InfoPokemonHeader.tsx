@@ -1,7 +1,7 @@
 import {PokemonDetail} from '../../data/PokemonDetail';
-import React, {useContext} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {ThemeContext} from '../../context/ThemeContext';
+import React from 'react';
+import {StyleSheet, View} from 'react-native';
+import {Text, useTheme} from 'react-native-paper';
 import {capitalize} from '../../utils/Utils';
 
 interface Props {
@@ -9,10 +9,10 @@ interface Props {
 }
 
 const InfoPokemonHeader = ({pokemon}: Props) => {
-  const {theme} = useContext(ThemeContext);
+  const {colors} = useTheme();
   return (
     <View>
-      <Text style={{...styles.name, color: theme.colors.text}}>
+      <Text style={{...styles.name, color: colors.text}}>
         {'#' + pokemon.id} - {pokemon.name && capitalize(pokemon.name)}
       </Text>
     </View>

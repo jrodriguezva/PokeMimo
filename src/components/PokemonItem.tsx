@@ -3,42 +3,46 @@ import {Pokemon} from '../data/Pokedex';
 import {
   Image,
   StyleSheet,
-  Text,
   TouchableOpacity,
   useWindowDimensions,
   View,
 } from 'react-native';
 import {FadeInImage} from './FadeInImage';
-
+import {Text} from 'react-native-paper';
 import ImageColors from 'react-native-image-colors';
 import {useNavigation} from '@react-navigation/native';
 
 interface Props {
   pokemon: Pokemon;
+  event?: () => void;
 }
 
-const PokemonItem = ({pokemon}: Props) => {
+const PokemonItem = ({pokemon, event}: Props) => {
   const {width} = useWindowDimensions();
   const [bgColor, setBgColor] = useState('grey');
   const isMounted = useRef(true);
   const navigation = useNavigation();
 
   useEffect(() => {
-    ImageColors.getColors(pokemon.image, {fallback: 'grey'}).then(colors => {
-      if (!isMounted.current) return;
+    if (pokemon.image != null) {
+      ImageColors.getColors(pokemon.image, {fallback: 'grey'}).then(colors => {
+        if (!isMounted.current) {
+          return;
+        }
 
-      switch (colors.platform) {
-        case 'android':
-        case 'web':
-          setBgColor(colors.muted || 'grey');
-          break;
-        case 'ios':
-          setBgColor(colors.background || 'grey');
-          break;
-        default:
-          throw new Error('Unexpected platform');
-      }
-    });
+        switch (colors.platform) {
+          case 'android':
+          case 'web':
+            setBgColor(colors.muted || 'grey');
+            break;
+          case 'ios':
+            setBgColor(colors.background || 'grey');
+            break;
+          default:
+            throw new Error('Unexpected platform');
+        }
+      });
+    }
 
     return () => {
       isMounted.current = false;
@@ -48,11 +52,14 @@ const PokemonItem = ({pokemon}: Props) => {
   return (
     <TouchableOpacity
       activeOpacity={0.9}
-      onPress={() =>
-        navigation.navigate('PokemonDetailScreen', {
-          pokemon: pokemon,
-          color: bgColor,
-        })
+      onPress={
+        event
+          ? event
+          : () =>
+              navigation.navigate('PokemonDetailScreen', {
+                pokemon: pokemon,
+                color: bgColor,
+              })
       }>
       <View
         style={{
@@ -73,20 +80,19 @@ const PokemonItem = ({pokemon}: Props) => {
             style={styles.pokeball}
           />
         </View>
-
-        <FadeInImage
-          uri={pokemon.image}
-          style={styles.pokemonImage}
-          showLoading={true}
-        />
+        {pokemon.image && (
+          <FadeInImage
+            uri={pokemon.image}
+            style={styles.pokemonImage}
+            showLoading={true}
+          />
+        )}
       </View>
     </TouchableOpacity>
   );
 };
 
 export default PokemonItem;
-
-// import { colors, fonts, metrics } from 'styles';
 
 const styles = StyleSheet.create({
   cardContainer: {

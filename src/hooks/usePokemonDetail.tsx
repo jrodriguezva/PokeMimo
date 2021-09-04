@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {pokemonApi} from '../api/pokemonApi';
+import {cancelToken, pokemonApi} from '../data/api/pokemonApi';
 import {PokemonDetail} from '../data/PokemonDetail';
 import {PokemonSpecies} from '../data/PokemonSpecies';
 
@@ -16,14 +16,31 @@ export const usePokemonDetail = (id: string) => {
 
   const loadPokemonDetail = async () => {
     isLoading(true);
-    const resp = await pokemonApi.get<PokemonDetail>(url);
+
+    const sourceDetail = cancelToken.source();
+    const sourceSpecies = cancelToken.source();
+
+    const resp = await pokemonApi.get<PokemonDetail>(url, {
+      cancelToken: sourceDetail.token,
+    });
     const respSpecies = await pokemonApi.get<PokemonSpecies>(
       resp.data.species.url,
+      {
+        cancelToken: sourceSpecies.token,
+      },
     );
 
     setPokemonSpecies(respSpecies.data);
     setPokemonDetail(resp.data);
     isLoading(false);
+    return () => {
+      if (sourceDetail) {
+        sourceDetail.cancel();
+      }
+      if (sourceSpecies) {
+        sourceSpecies.cancel();
+      }
+    };
   };
 
   useEffect(() => {

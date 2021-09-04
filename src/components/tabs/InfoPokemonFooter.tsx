@@ -1,11 +1,12 @@
 import {PokemonDetail} from '../../data/PokemonDetail';
 import {PokemonSpecies} from '../../data/PokemonSpecies';
-import React, {useContext} from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {ScrollView, StyleSheet, View} from 'react-native';
+// @ts-ignore
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {ThemeContext} from '../../context/ThemeContext';
 import {capitalize} from '../../utils/Utils';
 import {FadeInImage} from '../FadeInImage';
+import {useTheme, Text} from 'react-native-paper';
 
 interface Props {
   pokemon: PokemonDetail;
@@ -13,14 +14,14 @@ interface Props {
 }
 
 const InfoPokemonFooter = ({pokemon, pokemonSpecies}: Props) => {
-  const {theme} = useContext(ThemeContext);
+  const {colors} = useTheme();
   return pokemon.id && pokemonSpecies.id ? (
     <View>
       <View style={styles.container}>
         <Text
           style={{
             ...styles.detail,
-            color: theme.colors.text,
+            color: colors.text,
           }}>
           {pokemonSpecies.flavor_text_entries
             .filter(item => item.language.name.includes('en'))[0]
@@ -31,16 +32,21 @@ const InfoPokemonFooter = ({pokemon, pokemonSpecies}: Props) => {
         style={{
           ...styles.cardContainer,
           ...styles.shadowProp,
+          backgroundColor: colors.surface,
           flexDirection: 'row',
           justifyContent: 'space-around',
         }}>
         <View style={{marginHorizontal: 24}}>
-          <Text>Height</Text>
-          <Text style={styles.breedingDetail1}>{pokemon.height / 10} m</Text>
+          <Text style={{color: colors.onSurface}}>Height</Text>
+          <Text style={{...styles.breedingDetail1, color: colors.onSurface}}>
+            {pokemon.height / 10} m
+          </Text>
         </View>
         <View style={{marginHorizontal: 24}}>
-          <Text>Weight</Text>
-          <Text style={styles.breedingDetail1}>{pokemon.weight / 10} kg</Text>
+          <Text style={{color: colors.onSurface}}>Weight</Text>
+          <Text style={{...styles.breedingDetail1, color: colors.onSurface}}>
+            {pokemon.weight / 10} kg
+          </Text>
         </View>
       </View>
 
@@ -56,11 +62,11 @@ const InfoPokemonFooter = ({pokemon, pokemonSpecies}: Props) => {
             <Text style={styles.breedingDetail1}>
               {(pokemonSpecies.gender_rate / 8) * 100}%
             </Text>
-            <Icon name="gender-female" size={16} color={theme.colors.text} />
+            <Icon name="gender-female" size={16} color={colors.text} />
             <Text style={{...styles.breedingDetail1, marginStart: 5}}>
               {100 - (pokemonSpecies.gender_rate / 8) * 100}%
             </Text>
-            <Icon name="gender-male" size={16} color={theme.colors.text} />
+            <Icon name="gender-male" size={16} color={colors.text} />
           </View>
         </View>
         <View style={styles.horizontalView}>
@@ -133,7 +139,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   cardContainer: {
-    backgroundColor: 'white',
     marginHorizontal: 24,
     borderRadius: 8,
     paddingVertical: 15,

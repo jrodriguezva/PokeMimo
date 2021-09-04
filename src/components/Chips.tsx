@@ -1,8 +1,8 @@
-import React, {useContext} from 'react';
-import {StyleProp, StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {StyleProp, StyleSheet, View} from 'react-native';
 import {Type} from '../data/PokemonDetail';
 import {getTypeColor} from '../utils/Utils';
-import {ThemeContext} from '../context/ThemeContext';
+import {useTheme, Text} from 'react-native-paper';
 
 interface Props {
   type: Type;
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const MaterialChipTypes = ({type, style}: Props) => {
-  const {theme} = useContext(ThemeContext);
+  const {colors} = useTheme();
   const color = getTypeColor(type.type.name);
   return (
     <View
@@ -22,7 +22,7 @@ const MaterialChipTypes = ({type, style}: Props) => {
       <Text
         style={{
           ...styles.chipText,
-          color: theme.textSecondaryColor,
+          color: colors.text,
         }}>
         {type.type.name}
       </Text>

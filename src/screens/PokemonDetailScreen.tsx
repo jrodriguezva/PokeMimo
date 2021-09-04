@@ -1,5 +1,11 @@
-import React, {useContext, useEffect} from 'react';
-import {Animated, StyleSheet, useWindowDimensions, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {
+  Animated,
+  StatusBar,
+  StyleSheet,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 import {TabBar, TabView} from 'react-native-tab-view';
 import {FadeInImage} from '../components/FadeInImage';
 import {RootStackParams} from '../navigation/PokedexNavigator';
@@ -7,8 +13,8 @@ import {StackScreenProps} from '@react-navigation/stack';
 import {useAnimation} from '../hooks/useAnimation';
 import {usePokemonDetail} from '../hooks/usePokemonDetail';
 import InfoPokemonTab from '../components/tabs/InfoPokemonTab';
-import {ThemeContext} from '../context/ThemeContext';
 import StatsPokemonTab from '../components/tabs/StatsPokemonTab';
+import {useTheme} from 'react-native-paper';
 
 interface Props
   extends StackScreenProps<RootStackParams, 'PokemonDetailScreen'> {}
@@ -16,7 +22,7 @@ interface Props
 const PokemonDetailScreen = ({route}: Props) => {
   const layout = useWindowDimensions();
   const {rotateAnimation, animatedStyle} = useAnimation();
-  const {theme} = useContext(ThemeContext);
+  const {colors} = useTheme();
   const {pokemon, color} = route.params;
   const {pokemonDetail, pokemonSpecies} = usePokemonDetail(pokemon.id);
 
@@ -52,22 +58,25 @@ const PokemonDetailScreen = ({route}: Props) => {
 
   return (
     <View style={{flex: 1, backgroundColor: color}}>
+      <StatusBar backgroundColor={color} />
       <View style={styles.pokemonContainer}>
         <Animated.Image
           source={require('../assets/pokeball-simple.png')}
           style={[styles.pokeball, animatedStyle]}
         />
-        <FadeInImage
-          uri={pokemon.image}
-          style={styles.pokemonImage}
-          showLoading={false}
-        />
+        {pokemon.image && (
+          <FadeInImage
+            uri={pokemon.image}
+            style={styles.pokemonImage}
+            showLoading={false}
+          />
+        )}
       </View>
       <TabView
         navigationState={{index, routes}}
         renderScene={renderScene}
         renderTabBar={props => (
-          <TabBar {...props} style={{backgroundColor: theme.colors.primary}} />
+          <TabBar {...props} style={{backgroundColor: colors.primary}} />
         )}
         onIndexChange={setIndex}
         initialLayout={{width: layout.width}}

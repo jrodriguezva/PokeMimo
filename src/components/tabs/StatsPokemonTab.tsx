@@ -1,16 +1,9 @@
-import React, {useContext} from 'react';
-import {
-  FlatList,
-  StyleSheet,
-  Text,
-  useWindowDimensions,
-  View,
-} from 'react-native';
+import React from 'react';
+import {FlatList, useWindowDimensions, View} from 'react-native';
 import {PokemonDetail} from '../../data/PokemonDetail';
-import MaterialChipTypes from '../Chips';
-import {ThemeContext} from '../../context/ThemeContext';
 import * as Progress from 'react-native-progress';
 import {PokemonSpecies} from '../../data/PokemonSpecies';
+import {Text, useTheme} from 'react-native-paper';
 
 interface Props {
   pokemon: PokemonDetail;
@@ -18,14 +11,14 @@ interface Props {
 }
 
 const InfoPokemonTab = ({pokemon, pokemonSpecies}: Props) => {
-  const {theme} = useContext(ThemeContext);
+  const {colors} = useTheme();
   const {width} = useWindowDimensions();
 
   return (
     <View
       style={{
         flex: 1,
-        backgroundColor: theme.colors.background,
+        backgroundColor: colors.background,
         flexDirection: 'column',
       }}>
       <View style={{marginTop: 24}}>
